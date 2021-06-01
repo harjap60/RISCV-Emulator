@@ -36,13 +36,13 @@ jobs:
           echo "##[set-output name=log;]$(echo ./$LOG_ARTIFACT)"
           echo "##[set-output name=json;]$(echo ./$JSON_ARTIFACT)"
       #          pip install pandas
-      - uses: actions/upload-artifact@v2
-        if: ${{ failure() || success() }}
-        with:
-          name: my-artifact
-          path: |
-            ${{ steps.artifact.outputs.log }}
-            ${{ steps.artifact.outputs.json }}
+      #      - uses: actions/upload-artifact@v2
+      #        if: ${{ failure() || success() }}
+      #        with:
+      #          name: my-artifact
+      #          path: |
+      #            ${{ steps.artifact.outputs.log }}
+      #            ${{ steps.artifact.outputs.json }}
 
       - name: Assign variable
         if: ${{ failure() || success() }}
