@@ -45,7 +45,7 @@ void decode_instruction(uint32_t instruction_bits) {
         case 0x73:
             print_ecall(instruction);
             break;
-        default: // undefined opcode
+        default: // undefined opcode 
             handle_invalid_instruction(instruction);
             break;
     }
@@ -223,26 +223,27 @@ void write_branch(Instruction instruction) {
 }
 
 void print_lui(Instruction instruction) {
-    /* YOUR CODE HERE */
+    /* YOUR CODE HERE  U-TYPE*/ // LUI_FORMAT "lui\tx%d, %d\n"
+    printf(LUI_FORMAT,instruction.utype.rd, instruction.utype.imm);
+
 }
 
 void print_jal(Instruction instruction) {
-    /* YOUR CODE HERE */
+    /* YOUR CODE HERE UJ-TYPE*/ // JAL_FORMAT "jal\tx%d, %d\n"
+    printf(JAL_FORMAT,instruction.ujtype.rd, get_jump_offset(instruction));
 }
 
 void print_ecall(Instruction instruction) {
-    /* YOUR CODE HERE */
+    /* YOUR CODE HERE I-TYPE*/ // ECALL_FORMAT "ecall\n"
     printf(ECALL_FORMAT);
 }
 
 void print_rtype(char *name, Instruction instruction) {
   printf(RTYPE_FORMAT, name, instruction.rtype.rd, instruction.rtype.rs1,
          instruction.rtype.rs2);
-  /* YOUR CODE HERE */
 }
 
 void print_itype_except_load(char *name, Instruction instruction, int imm) {
-    /* YOUR CODE HERE */
     printf(ITYPE_FORMAT, name,
             instruction.itype.rd,
             instruction.itype.rs1,
@@ -251,7 +252,6 @@ void print_itype_except_load(char *name, Instruction instruction, int imm) {
 }
 
 void print_load(char *name, Instruction instruction) {
-    /* YOUR CODE HERE */
     printf(MEM_FORMAT, name,
             instruction.itype.rd,
             instruction.itype.imm,
@@ -259,7 +259,6 @@ void print_load(char *name, Instruction instruction) {
 }
 
 void print_store(char *name, Instruction instruction) {
-    /* YOUR CODE HERE */
     printf(MEM_FORMAT,name,
             instruction.stype.rs2,
              get_store_offset(instruction),
@@ -267,6 +266,7 @@ void print_store(char *name, Instruction instruction) {
 }
 
 void print_branch(char *name, Instruction instruction) {
-    /* YOUR CODE HERE */
-    //
+    /* YOUR CODE HERE SB-TYPE*/
+    //BRANCH_FORMAT "%s\tx%d, x%d, %d\n"
+    printf(BRANCH_FORMAT,name, instruction.sbtype.rs1, instruction.sbtype.rs2, get_branch_offset(instruction));
 }
